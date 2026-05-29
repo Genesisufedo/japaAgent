@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+
+  --color-primary: #10b981;      
+  --color-primary-hover: #059669;
+  
+  
+  --color-canvas: #064e3b;       
+  --color-surface: #ffffff;      
+  
+  
+  --color-text-main: #064e3b;    
+  --color-text-muted: #64748b;   
+  --color-border: #d1fae5;       
+}
+
+@layer base {
+  body { @apply bg-canvas text-text-main; }
+}
