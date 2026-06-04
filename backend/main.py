@@ -27,7 +27,11 @@ class ChatRequest(BaseModel):
     profile: Optional[Dict[str, Any]] = {}
     schools: Optional[List[Dict[str, Any]]] = []
     checklist: Optional[List[Any]] = []
+@app.get("/")
+async def root():
+    return {"message": "JapaPrep API is running"}
 
+    
 @app.post("/analyze")
 async def analyze(cv: UploadFile = File(...), transcript: UploadFile = File(...)):
     try:
