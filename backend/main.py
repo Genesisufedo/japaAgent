@@ -13,7 +13,7 @@ from groq import Groq
 
 
 app = FastAPI()
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=["https://japa-agent-hmx4.vercel.app"], allow_methods=["*"], allow_headers=["*"])
 
 load_dotenv()
 api_key = os.getenv("GROQ_API_KEY") 
@@ -68,6 +68,11 @@ async def chat(request: ChatRequest):
 
     return StreamingResponse(generate(), media_type="text/plain")
 
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app, host="0.0.0.0", port=8000)
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # Use the PORT environment variable provided by Render, default to 8000 for local
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
