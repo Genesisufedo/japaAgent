@@ -1,9 +1,11 @@
 import { useState } from "react";
 
-
 export function useAnalyzeProfile() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Pull the URL from the Vite environment variable
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const analyze = async (cvFile, transcriptFile) => {
     setLoading(true);
@@ -14,7 +16,8 @@ export function useAnalyzeProfile() {
     formData.append("transcript", transcriptFile);
 
     try {
-      const response = await fetch("http://localhost:8000/analyze", {
+      // Use the dynamic API_URL here
+      const response = await fetch(`${API_URL}/analyze`, {
         method: "POST",
         body: formData,
       });
@@ -31,7 +34,6 @@ export function useAnalyzeProfile() {
       setLoading(false);
     }
   };
-
 
   return { analyze, loading, error };
 }
